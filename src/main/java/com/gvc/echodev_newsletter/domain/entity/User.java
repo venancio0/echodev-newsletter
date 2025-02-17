@@ -1,12 +1,12 @@
 package com.gvc.echodev_newsletter.domain.entity;
 
+import com.gvc.echodev_newsletter.domain.enums.RolesEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.management.relation.Role;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -27,6 +27,6 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RolesEnum role;
 }
 
