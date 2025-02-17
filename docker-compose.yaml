@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: echodevnewsletter_db
+    restart: always
+    environment:
+      POSTGRES_DB: echodevnewsletter
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: jkmv9004
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: echodevnewsletter_app
+    depends_on:
+      - postgres
+    environment:
+      SPRING_APPLICATION_JSON: >
+        {
+          "spring.datasource.url": "jdbc:postgresql://postgres:5432/echodevnewsletter",
+          "spring.datasource.username": "root",
+          "spring.datasource.password": "jkmv9004",
+          "spring.datasource.driver-class-name": "org.postgresql.Driver",
+          "spring.jpa.hibernate.ddl-auto": "update",
+          "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
+          "spring.jpa.properties.show-sql": "true"
+        }
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres_data:
