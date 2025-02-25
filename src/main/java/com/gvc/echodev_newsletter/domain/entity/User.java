@@ -20,10 +20,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @Column(nullable = false)
     private String username;
 
-    @NotBlank
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
