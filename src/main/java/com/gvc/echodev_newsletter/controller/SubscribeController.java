@@ -3,15 +3,12 @@ package com.gvc.echodev_newsletter.controller;
 import com.gvc.echodev_newsletter.application.repository.SubscriberRepository;
 import com.gvc.echodev_newsletter.domain.entity.Subscriber;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/subscribers")
 @RequiredArgsConstructor
 public class SubscribeController {
@@ -19,6 +16,7 @@ public class SubscribeController {
 
     @PostMapping
     public Subscriber createSubscriber(@RequestBody Subscriber subscriber){
+        subscriber.setSubscribedAt(LocalDateTime.now());
         return subscriberRepository.save(subscriber);
     }
 

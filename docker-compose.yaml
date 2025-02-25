@@ -20,16 +20,10 @@ services:
     depends_on:
       - postgres
     environment:
-      SPRING_APPLICATION_JSON: >
-        {
-          "spring.datasource.url": "jdbc:postgresql://postgres:5432/echodevnewsletter",
-          "spring.datasource.username": "root",
-          "spring.datasource.password": "jkmv9004",
-          "spring.datasource.driver-class-name": "org.postgresql.Driver",
-          "spring.jpa.hibernate.ddl-auto": "update",
-          "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.PostgreSQLDialect",
-          "spring.jpa.properties.show-sql": "true"
-        }
+            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/echodevnewsletter
+            SPRING_DATASOURCE_USERNAME: root
+            SPRING_DATASOURCE_PASSWORD: jkmv9004
+            SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
     ports:
       - "8080:8080"
 
