@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,9 +30,11 @@ public class EmailService {
     public void sendNewsLetter(List<Subscriber> subscriberList, String subject, String content){
         String formattedContent = formatEmailContent(subject, content);
 
-        for(Subscriber subscriber : subscriberList){
-            sendEmail(subscriber.getEmail(), subject, formattedContent);
-        }
+        List<CompletableFuture<Void>> futures = subscriberList.stream()
+                .map(subscriber -> CompletableFuture.runAsync(() -> sendEmail(subscriber.getEmail(), subject, formattedContent)))
+                .toList();
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
     }
 
     private void sendEmail(String to, String subject, String content) {
