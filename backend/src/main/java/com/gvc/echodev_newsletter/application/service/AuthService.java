@@ -18,10 +18,10 @@ public class AuthService {
 
     public String authenticate(String username, String password) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Credenciais inválidas");
+            throw new RuntimeException("Invalid credentials");
         }
 
         return jwtUtil.generateToken(user.getUsername(), user.getRole());

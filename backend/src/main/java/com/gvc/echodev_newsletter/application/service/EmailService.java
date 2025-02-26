@@ -50,7 +50,7 @@ public class EmailService {
             mailSender.send(message);
 
         } catch (MessagingException e) {
-            throw new RuntimeException("Erro ao enviar e-mail", e);
+            throw new RuntimeException("Error with email sender. ", e);
         }
     }
 
@@ -68,7 +68,7 @@ public class EmailService {
                         .replace("{{content}}", content);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Erro ao carregar o template do e-mail", e);
+            throw new RuntimeException("Error loading template for the email ", e);
         }
     }
 }

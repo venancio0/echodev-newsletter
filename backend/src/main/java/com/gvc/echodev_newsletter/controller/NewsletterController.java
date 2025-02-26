@@ -31,10 +31,10 @@ public class NewsletterController {
         List<Subscriber> subscriberList = subscriberRepository.findAll();
 
         if(subscriberList.isEmpty()){
-            return ResponseEntity.badRequest().body("Nenhum inscrito encontrado.");
+            return ResponseEntity.badRequest().body("There are no subscribers.");
         }
 
         emailService.sendNewsLetter(subscriberList, newsletterRequest.getSubject(), newsletterRequest.getContent());
-        return ResponseEntity.ok("Newsletter enviada com sucesso!");
+        return ResponseEntity.ok("Newsletter sucessfully sent!");
     }
 }
