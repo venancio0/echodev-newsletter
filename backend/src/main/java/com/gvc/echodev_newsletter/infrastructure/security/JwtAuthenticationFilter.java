@@ -1,6 +1,5 @@
 package com.gvc.echodev_newsletter.infrastructure.security;
 
-import com.gvc.echodev_newsletter.application.service.AuthService;
 import com.gvc.echodev_newsletter.application.service.serviceImpl.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

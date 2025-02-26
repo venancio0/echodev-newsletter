@@ -15,17 +15,25 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    build: .
+    build: ./backend
     container_name: echodevnewsletter_app
     depends_on:
       - postgres
     environment:
-            SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/echodevnewsletter
-            SPRING_DATASOURCE_USERNAME: root
-            SPRING_DATASOURCE_PASSWORD: jkmv9004
-            SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/echodevnewsletter
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: jkmv9004
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
     ports:
       - "8080:8080"
+
+  frontend:
+    build: ./frontend/echodev-newsletter-frontend
+    container_name: echodevnewsletter_frontend
+    depends_on:
+      - app
+    ports:
+      - "3000:80"
 
 volumes:
   postgres_data:
