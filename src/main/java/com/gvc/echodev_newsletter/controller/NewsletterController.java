@@ -4,6 +4,8 @@ import com.gvc.echodev_newsletter.application.dto.NewsletterRequestDTO;
 import com.gvc.echodev_newsletter.application.repository.SubscriberRepository;
 import com.gvc.echodev_newsletter.application.service.EmailService;
 import com.gvc.echodev_newsletter.domain.entity.Subscriber;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,6 +24,8 @@ public class NewsletterController {
     private final EmailService emailService;
     private final SubscriberRepository subscriberRepository;
 
+    @Operation(summary = "Route for send newsletter with Admin user")
+    @ApiResponse(responseCode = "201", description = "Newsletter sent!")
     @PostMapping("/send")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> sendNewsletter(@RequestBody NewsletterRequestDTO newsletterRequest){

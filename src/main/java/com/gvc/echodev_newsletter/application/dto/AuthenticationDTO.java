@@ -8,10 +8,10 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewsletterRequestDTO {
+public class AuthenticationDTO {
     @NotBlank
-    private String subject;
+    private String username;
 
     @NotBlank
-    private String content;
+    private String password;
 }
