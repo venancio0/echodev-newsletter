@@ -14,14 +14,16 @@ EchoDev Newsletter is a Spring Boot application designed to simplify the process
 ## Tech Stack
 
 - **Backend**: Java 17, Spring Boot, Spring Data JPA
+- **Frontend**: React v19
 - **Database**: PostgreSQL / H2 (for development and testing)
-- **Email Service**: JavaMailSender / AWS SES (optional)
+- **Email Service**: JavaMailSender with Mime / AWS SES (optional)
 - **Security**: Spring Security, JWT Authentication
 - **Build & Dependency Management**: Maven
 
 ### Prerequisites
 
 - Java 17+
+- Spring 3+
 - Maven 3+
 - PostgreSQL (or use H2 for local development)
 
