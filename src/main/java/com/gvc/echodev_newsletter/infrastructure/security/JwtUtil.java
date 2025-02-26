@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private static final String secretKey = "zY8wLCmQyXTf8LMj5oNVUzeEkJmVXcPaB9de10cMwKw";
 
     private static final long EXPIRATION_TIME = 86400000;
 
@@ -44,6 +44,9 @@ public class JwtUtil {
 
     public boolean validateToken(String token) {
         try {
+            if(token.startsWith("Bearer ")){
+                token = token.substring(7);
+            }
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
