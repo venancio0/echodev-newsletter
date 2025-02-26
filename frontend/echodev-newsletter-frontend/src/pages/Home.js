@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { subscribe, unsubscribe } from "../api/subscriberApi";
+import { subscribe, getSubscriberByEmail, deleteSubscriberById } from "../api/subscriberApi";
 import "../styles/App.css";
 
 const Home = () => {
@@ -9,33 +9,38 @@ const Home = () => {
     const handleSubscribe = async () => {
         try {
             await subscribe(email);
-            setMessage("Inscrição realizada com sucesso!");
+            setMessage("Successfully subscribed!");
         } catch (error) {
-            setMessage("Erro ao se inscrever.");
+            setMessage("Error while subscribing.");
         }
     };
 
     const handleUnsubscribe = async () => {
         try {
-            await unsubscribe(email);
-            setMessage("Descadastrado com sucesso!");
+            const subscriber = await getSubscriberByEmail(email);
+            if (subscriber && subscriber.id) {
+                await deleteSubscriberById(subscriber.id);
+                setMessage("Successfully unsubscribed!");
+            } else {
+                setMessage("Email not found.");
+            }
         } catch (error) {
-            setMessage("Erro ao descadastrar.");
+            setMessage("Error while unsubscribing.");
         }
     };
 
     return (
         <div className="container">
             <h1>EchoDev Newsletter</h1>
-            <p>Cadastre-se para receber novidades do mundo Tech!</p>
+            <p>Sign up to receive the latest tech news!</p>
             <input
                 type="email"
-                placeholder="Digite seu email"
+                placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
-            <button onClick={handleSubscribe}>Cadastrar</button>
-            <button onClick={handleUnsubscribe}>Descadastrar</button>
+            <button onClick={handleSubscribe}>Subscribe</button>
+            <button onClick={handleUnsubscribe}>Unsubscribe</button>
             <p>{message}</p>
         </div>
     );
